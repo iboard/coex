@@ -89,6 +89,7 @@ defmodule CoexWeb do
       import Phoenix.HTML
       # Core UI components
       import CoexWeb.CoreComponents
+      import CoexWeb.CommonComponents
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
