@@ -11,5 +11,11 @@ defmodule LandingLiveTest do
 
       refute element(lv, "#connection-error") |> has_element?()
     end
+
+    test "unauthenticated menu", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/l")
+
+      assert element(lv, "#features") |> has_element?()
+    end
   end
 end

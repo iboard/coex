@@ -1,24 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" class="[scrollbar-gutter:stable]">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="csrf-token" content={get_csrf_token()} />
-    <.live_title default="Coex" suffix=" · Phoenix Framework">
-      {assigns[:page_title]}
-    </.live_title>
-    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
-    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
-    </script>
-  </head>
-  <body class="bg-white">
-    <.flash_group flash={@flash} />
-    <div class="bg-indigo-600 text-indigo-100 pl-2">
-      A demo and poc web application using package <code>conion 0.1.0</code>
-      <span class="float-right text-right pr-2">
-        <.current_date />
-      </span>
-    </div>
-    {@inner_content}
-  </body>
-</html>
+<.flash_group flash={@flash} />
+<div class="bg-indigo-600 text-indigo-100 pl-2">
+  A demo and poc web application using package <code>conion 0.1.0</code>
+  <span class="float-right text-right pr-2">
+    <.current_date_time id="clock" />
+  </span>
+</div>
+<main>
+  {@inner_content}
+</main>
