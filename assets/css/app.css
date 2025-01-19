@@ -13,4 +13,12 @@
     @apply text-6xl text-indigo-700 
            drop-shadow-md;
   }
+
+  .error {
+    @apply my-4 p-10
+    text-red-800  text-xl text-center
+    bg-red-200
+    rounded-md border 
+    shadow-lg;
+  }
 }
