@@ -1,18 +1,12 @@
 # Coex
 
-To start your Phoenix server:
+An example application using [Conion](https://github.com/iboard/conion) in a Phoenix LiveView application.
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
-
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+In mix.exs/deps, if you checked out Conion first, you can use
+```
+  {:conion, path: "../conion"}
+```
+or reference Conion as a package like so
+```
+ { :conion, "~> 0.1"}
+```
