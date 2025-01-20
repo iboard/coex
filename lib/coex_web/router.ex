@@ -21,6 +21,8 @@ defmodule CoexWeb.Router do
 
     live_session(:default, on_mount: [{CoexWeb.UserAuth, :current_user}]) do
       live "/l", LandingLive, :welcome
+      live "/persons", PersonsLive, :index
+      live "/persons/new", PersonsLive, :new
     end
   end
 
