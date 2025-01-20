@@ -21,4 +21,9 @@
     rounded-md border 
     shadow-lg;
   }
+
+  .button {
+    @apply p-2 bg-blue-800 text-white rounded-md shadow-md 
+    hover:bg-blue-900 hover:shadow-lg hover:drop-shadow-lg hover:text-gray-200;
+  }
 }
