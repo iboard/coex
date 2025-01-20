@@ -7,6 +7,12 @@
 # General application configuration
 import Config
 
+config :conion,
+  application_children: [
+    {Conion.Store.Server, name: Conion.Store.Server},
+    {Conion.Store.BucketSupervisor, name: Conion.Store.BucketSupervisor}
+  ]
+
 config :coex,
   generators: [timestamp_type: :utc_datetime]
 
