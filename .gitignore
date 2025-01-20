@@ -35,3 +35,5 @@ coex-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Ignore data in git-repository
+/data/
