@@ -84,6 +84,7 @@ defmodule CoexWeb.PersonsLive do
 
   def handle_event("delete_person", %{"id" => id}, socket) do
     {:ok, person} = Conion.Store.remove(:persons, id)
+    Conion.Store.persist(:persons)
 
     socket =
       socket

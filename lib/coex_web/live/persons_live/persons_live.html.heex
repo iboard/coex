@@ -14,7 +14,7 @@
     <div
       :for={{id, person} <- @streams.persons}
       id={id}
-      class="flex mt-0 p-4 gap-8 w-full clear-both rounded-md hover:bg-slate-400"
+      class="flex mt-0 p-4 gap-8 w-full clear-both rounded-md hover:bg-gray-200"
     >
       <.link class="flex-1" phx-click="edit_person" phx-value-id={person.id} role="edit-person">
         <span class="font-semibold">{person.name}</span>
