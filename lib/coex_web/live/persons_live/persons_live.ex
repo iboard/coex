@@ -82,6 +82,18 @@ defmodule CoexWeb.PersonsLive do
     {:noreply, socket}
   end
 
+  def handle_event("delete_person", %{"id" => id}, socket) do
+    {:ok, person} = Conion.Store.remove(:persons, id)
+
+    socket =
+      socket
+      |> assign(:form, nil)
+      |> put_flash(:info, gettext("%{name} successfully deleted", %{name: person.name}))
+      |> push_patch(to: ~p"/persons")
+
+    {:noreply, socket}
+  end
+
   # private implementation
 
   defp create_person(params)

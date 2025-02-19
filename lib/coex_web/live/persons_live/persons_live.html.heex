@@ -11,10 +11,24 @@
   </div>
 
   <div id="persons">
-    <div :for={{id, person} <- @streams.persons} id={id}>
-      <.link phx-click="edit_person" phx-value-id={person.id} role="edit-person">
+    <div
+      :for={{id, person} <- @streams.persons}
+      id={id}
+      class="flex mt-0 p-4 gap-8 w-full clear-both rounded-md hover:bg-slate-400"
+    >
+      <.link class="flex-1" phx-click="edit_person" phx-value-id={person.id} role="edit-person">
         <span class="font-semibold">{person.name}</span>
         <span class="text-gray-600">({person.age})</span>
+      </.link>
+      <.link
+        class="flex-none"
+        phx-click="delete_person"
+        phx-value-id={person.id}
+        data-confirm={gettext("Delete '%{name}'. Are you sure?", %{name: person.name})}
+        role="delete-person"
+      >
+        <.icon name="hero-trash" class="w-6 h-6" />
+        <span class="hidden">{person.name}</span>
       </.link>
     </div>
   </div>

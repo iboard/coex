@@ -86,5 +86,18 @@ defmodule PersonLiveTest do
       |> click_button("Save changes")
       |> assert_has("#flash-info", text: "Frank updated successfully")
     end
+
+    test "add, delete person", %{conn: conn} do
+      conn
+      |> visit(~p"/persons")
+      # Add a person
+      |> click_link("New Person")
+      |> fill_in("Name", with: "Donald")
+      |> fill_in("Age", with: "80")
+      |> click_button("Create person")
+      |> assert_has("#flash-info", text: "New person Donald created successfully")
+      |> click_link("a[role=delete-person]", "Donald")
+      |> assert_has("#flash-info", text: "Donald successfully deleted")
+    end
   end
 end
