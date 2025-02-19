@@ -12,17 +12,21 @@
 
   <div id="persons">
     <div :for={{id, person} <- @streams.persons} id={id}>
-      <span class="font-semibold">{person.name}</span>
-      <span class="text-gray-600">({person.age})</span>
+      <.link phx-click="edit_person" phx-value-id={person.id} role="edit-person">
+        <span class="font-semibold">{person.name}</span>
+        <span class="text-gray-600">({person.age})</span>
+      </.link>
     </div>
   </div>
 </div>
 
-<.modal :if={not is_nil(@form)} show={true} id="new_person_form">
-  <.simple_form for={@form} phx-submit="create_person">
-    <h2 class="text-xl">{gettext("Insert new person")}</h2>
+{# PERSON FORM  }
+<.modal :if={not is_nil(@form)} show={true} id={ @form_action <> "-form" }>
+  <.simple_form for={@form} phx-submit={@form_action} phx-cancel={JS.push("cancel-edit")}>
+    <h2 class="text-xl">{@form_title}</h2>
+    <.input field={@form[:id]} type="hidden" />
     <.input field={@form[:name]} type="text" label={gettext("Name")} />
     <.input field={@form[:age]} type="number" label={gettext("Age")} />
-    <button class="button">{gettext("Create Person")}</button>
+    <button class="button">{@form_button}</button>
   </.simple_form>
 </.modal>

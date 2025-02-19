@@ -55,6 +55,8 @@ defmodule CoexWeb do
       use Phoenix.LiveView,
         layout: {CoexWeb.Layouts, :app}
 
+      use Gettext, backend: CoexWeb.Gettext
+
       unquote(html_helpers())
     end
   end
