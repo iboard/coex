@@ -1,6 +1,8 @@
 defmodule CoexWeb.PersonsLive do
+  @moduledoc """
+  Liveview to CRUD Persons
+  """
   use CoexWeb, :live_view
-
   use CoexWeb.Ticker
 
   @store_path "data/#{Mix.env()}/persons.data"
