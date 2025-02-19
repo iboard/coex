@@ -36,7 +36,14 @@
 
 {# PERSON FORM  }
 <.modal :if={not is_nil(@form)} show={true} id={ @form_action <> "-form" }>
-  <.simple_form for={@form} phx-submit={@form_action} phx-cancel={JS.push("cancel-edit")}>
+  <.simple_form
+    for={@form}
+    phx-submit={@form_action}
+    phx-key="escape"
+    phx-window-keydown={JS.push("cancel-edit")}
+    phx-click-away={JS.push("cancel-edit")}
+    phx-remove={JS.push("cancel-edit")}
+  >
     <h2 class="text-xl">{@form_title}</h2>
     <.input field={@form[:id]} type="hidden" />
     <.input field={@form[:name]} type="text" label={gettext("Name")} />

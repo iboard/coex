@@ -68,6 +68,15 @@ defmodule CoexWeb.PersonsLive do
     {:noreply, socket}
   end
 
+  def handle_event("cancel-edit", _params, socket) do
+    socket =
+      socket
+      |> assign(:form, nil)
+      |> push_patch(to: ~p"/persons")
+
+    {:noreply, socket}
+  end
+
   def handle_event("update_person", params, socket) do
     socket =
       case update_person(params) do
