@@ -7,28 +7,23 @@ defmodule CoexWeb.PersonsLive do
 
   @store_path "data/#{Mix.env()}/persons.data"
 
+  @impl true
   def mount(_, _, socket) do
     if connected?(socket), do: tick(self(), :minutes), else: open_store()
 
     socket =
       socket
-      |> stream(:persons, list_persons())
+      |> assign(:persons, list_persons())
       |> assign(:form, nil)
 
     {:ok, socket}
   end
 
-  def handle_params(_params, _, %{assigns: %{live_action: :index}} = socket) do
-    socket =
-      socket
-      |> stream(:persons, list_persons())
-
-    {:noreply, socket}
-  end
-
+  @impl true
   def handle_params(_params, _, %{assigns: %{live_action: :new}} = socket) do
     socket =
       socket
+      |> assign(:persons, list_persons())
       |> assign(:form_action, "create_person")
       |> assign(:form_title, gettext("Insert new person"))
       |> assign(:form_button, gettext("Create person"))
@@ -37,7 +32,7 @@ defmodule CoexWeb.PersonsLive do
     {:noreply, socket}
   end
 
-  def handle_event("edit_person", %{"id" => id}, socket) do
+  def handle_params(%{"id" => id}, _, %{assigns: %{live_action: :edit}} = socket) do
     {:ok, person} = Conion.Store.Bucket.get(:persons, id)
     person = Map.put(person, :id, id)
 
@@ -52,13 +47,33 @@ defmodule CoexWeb.PersonsLive do
     {:noreply, socket}
   end
 
+  def handle_params(_params, _, %{assigns: %{live_action: :index}} = socket) do
+    socket =
+      socket
+      |> assign(:persons, list_persons())
+      |> assign(form: nil)
+
+    {:noreply, socket}
+  end
+
+  @impl true
+
+  def handle_event("edit_person", %{"id" => id}, socket) do
+    socket =
+      socket
+      |> assign(:persons, list_persons())
+      |> push_navigate(to: ~p"/persons/#{id}/edit")
+
+    {:noreply, socket}
+  end
+
   def handle_event("create_person", params, socket) do
     socket =
       case create_person(params) do
         {:ok, person} ->
           socket
           |> handle_success(person, :created)
-          |> push_patch(to: ~p"/persons")
+          |> push_navigate(to: ~p"/persons")
 
         {:error, errors} ->
           socket
@@ -72,7 +87,7 @@ defmodule CoexWeb.PersonsLive do
     socket =
       socket
       |> assign(:form, nil)
-      |> push_patch(to: ~p"/persons")
+      |> push_navigate(to: ~p"/persons")
 
     {:noreply, socket}
   end
@@ -83,7 +98,7 @@ defmodule CoexWeb.PersonsLive do
         {:ok, person} ->
           socket
           |> handle_success(person, :updated)
-          |> push_patch(to: ~p"/persons")
+          |> push_navigate(to: ~p"/persons")
 
         {:error, errors} ->
           socket
@@ -101,7 +116,7 @@ defmodule CoexWeb.PersonsLive do
       socket
       |> assign(:form, nil)
       |> put_flash(:info, gettext("%{name} successfully deleted", %{name: person.name}))
-      |> push_patch(to: ~p"/persons")
+      |> push_navigate(to: ~p"/persons")
 
     {:noreply, socket}
   end
@@ -167,7 +182,7 @@ defmodule CoexWeb.PersonsLive do
 
     socket
     |> assign(:form, nil)
-    |> stream_insert(:persons, person)
+    |> assign(:persons, list_persons())
     |> put_flash(:info, msg)
   end
 
