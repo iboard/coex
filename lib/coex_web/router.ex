@@ -23,6 +23,7 @@ defmodule CoexWeb.Router do
       live "/l", LandingLive, :welcome
       live "/persons", PersonsLive, :index
       live "/persons/new", PersonsLive, :new
+      live "/persons/:id/edit", PersonsLive, :edit
     end
   end
 
