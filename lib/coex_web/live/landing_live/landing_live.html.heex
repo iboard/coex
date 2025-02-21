@@ -7,7 +7,7 @@
     <.menu_box
       id="features"
       title={gettext("Features Menu")}
-      items={[{gettext("Persons"), ~p"/persons"}, {gettext("Item 2"), "#"}]}
+      items={[{gettext("Persons"), ~p"/persons"}]}
     >
       <div class="mt-2 text-xs">{gettext("These are the features, implemented so far.")}</div>
     </.menu_box>
@@ -15,11 +15,11 @@
     <.menu_box
       id="upcomming-features"
       title={gettext("More to come")}
+      list_class="list-inside list-disc text-gray-500"
       items={[
-        {gettext("Item 1"), "#"},
-        {gettext("Item 2"), "#"},
-        {gettext("Item 3"), "#"},
-        {gettext("Item 4"), "#"}
+        {gettext("Authentication"), "#"},
+        {gettext("Emails"), "#"},
+        {gettext("Translations"), "#"}
       ]}
     >
       <div class="mt-2 text-xs">{gettext("These are the planed features.")}</div>

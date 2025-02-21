@@ -45,9 +45,11 @@
     phx-remove={JS.push("cancel-edit")}
   >
     <h2 class="text-xl">{@form_title}</h2>
-    <.input field={@form[:id]} type="hidden" />
     <.input field={@form[:name]} type="text" label={gettext("Name")} />
     <.input field={@form[:age]} type="number" label={gettext("Age")} />
-    <button class="button">{@form_button}</button>
+    <button class="button mt-4">{@form_button}</button>
+
+    {# don't move the hidden field to the top, it will compromise auto-focus!}
+    <.input field={@form[:id]} type="hidden" />
   </.simple_form>
 </.modal>
