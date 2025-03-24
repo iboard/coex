@@ -1,6 +1,9 @@
 defmodule CoexWeb.PersonsLive do
   @moduledoc """
   Liveview to CRUD Persons
+
+
+  TODO: extract validation and move it to Conion
   """
   use CoexWeb, :live_view
   use CoexWeb.Ticker
